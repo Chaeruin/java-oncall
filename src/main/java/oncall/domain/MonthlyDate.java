@@ -5,13 +5,14 @@ public class MonthlyDate {
     private final int date;
     private final String day;
 
-    private boolean isHoliday;
+    private final boolean isHoliday;
 
 
-    public MonthlyDate(int month, int date, String day) {
+    public MonthlyDate(int month, int date, String day, boolean isHoliday) {
         this.month = month;
         this.date = date;
         this.day = day;
+        this.isHoliday = isHoliday;
     }
 
     public int getMonth() {
@@ -30,7 +31,4 @@ public class MonthlyDate {
         return this.isHoliday;
     }
 
-    public void setIsHoliday(boolean isHoliday) {
-        this.isHoliday = isHoliday;
-    }
 }
