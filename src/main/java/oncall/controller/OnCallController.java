@@ -1,8 +1,11 @@
 package oncall.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import oncall.domain.DateEmployee;
+import oncall.domain.MonthDay;
+import oncall.domain.MonthlyDate;
+import oncall.service.DateEmployeeService;
+import oncall.service.InitializerService;
 import oncall.utils.InputParser;
 import oncall.view.InputView;
 import oncall.view.OutputView;
@@ -11,13 +14,22 @@ public class OnCallController {
     final InputView inputView;
     final OutputView outputView;
 
+    final InitializerService initializerService;
+    final DateEmployeeService dateEmployeeService;
 
-    public OnCallController(InputView inputView, OutputView outputView) {
+
+    public OnCallController(InputView inputView, OutputView outputView, InitializerService initializerService,
+                            DateEmployeeService dateEmployeeService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.initializerService = initializerService;
+        this.dateEmployeeService = dateEmployeeService;
     }
 
     public void run() {
+
+        MonthDay monthAndDay = getMonthAndDayHandler();
+        List<MonthlyDate> initMonth = initializerService.initMonth(monthAndDay.getMonth(), monthAndDay.getDay());
 
         // 중간에 잘못 입력하면 특정 구간으로 재이동
         List<String> weelkyEmployee = getWeeklyEmployeeHandler();
@@ -29,26 +41,27 @@ public class OnCallController {
             }
         }
 
+        List<DateEmployee> dateEmployees = dateEmployeeService.allocEmployee(initMonth, weelkyEmployee,
+                holidayEmployee);
+        outputView.printMonthlyDateEmployee(dateEmployees);
     }
 
 
     // Input list 반복
-    public Map<Integer, String> getMonthAndDayHandler() {
+    public MonthDay getMonthAndDayHandler() {
         int month = 0;
         String day = null;
-        Map<Integer, String> monthAndDays = new HashMap<>();
         while (month == 0 || day == null) {
             try {
                 String input = inputView.getMonthAndDayofWeek();
                 month = InputParser.parseMonth(input);
                 day = InputParser.parseDayOfWeek(input);
-                monthAndDays.put(month, day);
-                return monthAndDays;
+                return new MonthDay(month, day);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        return monthAndDays;
+        return null;
     }
 
     // 일반 스트링 반복

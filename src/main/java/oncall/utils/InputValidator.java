@@ -74,7 +74,8 @@ public class InputValidator {
     }
 
     public static boolean isEmployeeCondition(String input) {
-        if (isNotNone(input) && isOverFiveNickNameLength(input) && isFiveTo35People(input) && isNotDuplicate(input)) {
+        if (isNotNone(input) && isOverFiveNickNameLength(input) && isFiveTo35People(input) && isNotDuplicate(input)
+                && isWeelkyOrHolidayEmployeeOnce(input)) {
             return true;
         }
         return false;
@@ -90,5 +91,15 @@ public class InputValidator {
         }
         return true;
     }
+
+    public static boolean isWeelkyOrHolidayEmployeeOnce(String weekly) {
+        Set<String> weelkySet = new HashSet<String>(Arrays.asList(weekly.split(",", -1)));
+        // 여기 체킹
+        if (weelkySet.size() != Arrays.asList(weekly.split(",", -1)).size()) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_EMPL.getErrorMessage());
+        }
+        return true;
+    }
+
 
 }

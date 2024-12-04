@@ -39,7 +39,7 @@ public class MonthlyDate {
         }
     }
 
-    public boolean isHolidayAndWeekend() {
-        return this.isHoliday && this.isWeekEnd;
+    public boolean isHolidayAndWeekDay() {
+        return this.isHoliday && !this.isWeekEnd;
     }
 }

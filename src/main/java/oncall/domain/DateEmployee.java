@@ -1,7 +1,7 @@
 package oncall.domain;
 
 public class DateEmployee {
-    private final MonthlyDate monthlyDate;
+    private MonthlyDate monthlyDate;
 
     private final String nickName;
 

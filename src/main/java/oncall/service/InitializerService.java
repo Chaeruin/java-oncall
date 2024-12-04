@@ -24,15 +24,25 @@ public class InitializerService {
         int idx = findAtDaysArray(day, date);
         boolean isHoliday = false;
         for (int i = 1; i <= days; i++) {
-            if (isHolidays(month, i)) {
+            if (isHolidays(month, i) || isWeekend(day, date, i)) {
                 isHoliday = true;
             }
-            MonthlyDate monthlyDate = new MonthlyDate(month, i, day[(findAtDaysArray(day, date) + i) % 7], isHoliday);
+            MonthlyDate monthlyDate = new MonthlyDate(month, i, day[(findAtDaysArray(day, date) - 1 + i) % 7],
+                    isHoliday);
             monthlyDate.setWeekEnd();
             monthlyDates.add(monthlyDate);
+            isHoliday = false;
         }
 
         return monthlyDates;
+    }
+
+    public boolean isWeekend(String[] day, String date, int i) {
+        if (day[(findAtDaysArray(day, date) - 1 + i) % 7].equals("토") || day[(findAtDaysArray(day, date) - 1 + i)
+                % 7].equals("일")) {
+            return true;
+        }
+        return false;
     }
 
     public int findAtDaysArray(String[] day, String date) {

@@ -1,7 +1,7 @@
 package oncall.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 public class InputParser {
@@ -24,8 +24,7 @@ public class InputParser {
 
     public static List<String> parseWeeklyEmployee(String input) {
         if (InputValidator.isEmployeeCondition(input)) {
-            LinkedList<String> returnList = (LinkedList<String>) Arrays.asList(input.split(",", -1));
-            return returnList;
+            return new ArrayList<>(Arrays.asList(input.split(",", -1)));
         }
         return null;
     }
@@ -33,8 +32,7 @@ public class InputParser {
     public static List<String> parseHolidayEmployee(List<String> weekly, String holiday) {
         if (InputValidator.isEmployeeCondition(holiday) && InputValidator.isWeelkyHolidaySameEmployee(weekly,
                 holiday)) {
-            LinkedList<String> returnList = (LinkedList<String>) Arrays.asList(holiday.split(",", -1));
-            return returnList;
+            return new ArrayList<>(Arrays.asList(holiday.split(",", -1)));
         }
         return null;
     }
