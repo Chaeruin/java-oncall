@@ -52,7 +52,7 @@ public class InputValidator {
     public static boolean isFiveTo35People(String input) {
         String[] inputs = input.split(",", -1);
         if (inputs.length < 5 || inputs.length > 35) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LENGTH.getErrorMessage());
+            throw new IllegalArgumentException(ErrorMessage.INVALID_EMPL.getErrorMessage());
         }
         return true;
     }

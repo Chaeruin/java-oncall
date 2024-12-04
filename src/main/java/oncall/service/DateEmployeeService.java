@@ -26,7 +26,7 @@ public class DateEmployeeService {
         int place = 0;
         String tempEmpl = null;
         if (dateEmployees.size() != 0 && dateEmployees.getLast().getNickName().equals(weekOrHoli.get(idx))) {
-            place = idx + 1;
+            place = getPlace(weekOrHoli, idx);
             tempEmpl = weekOrHoli.remove(place);
             dateEmployees.add(new DateEmployee(monthlyDate, tempEmpl));
         } else {
@@ -39,5 +39,12 @@ public class DateEmployeeService {
             }
         }
         return idx;
+    }
+
+    public int getPlace(List<String> weekOrHoli, int idx) {
+        if (idx + 1 == weekOrHoli.size()) {
+            return 0;
+        }
+        return idx + 1;
     }
 }
