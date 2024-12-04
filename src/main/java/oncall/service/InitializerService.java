@@ -27,8 +27,11 @@ public class InitializerService {
             if (isHolidays(month, i)) {
                 isHoliday = true;
             }
-            monthlyDates.add(new MonthlyDate(month, i, day[(findAtDaysArray(day, date) + i) % 7], isHoliday));
+            MonthlyDate monthlyDate = new MonthlyDate(month, i, day[(findAtDaysArray(day, date) + i) % 7], isHoliday);
+            monthlyDate.setWeekEnd();
+            monthlyDates.add(monthlyDate);
         }
+
         return monthlyDates;
     }
 

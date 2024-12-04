@@ -6,6 +6,7 @@ public class MonthlyDate {
     private final String day;
 
     private final boolean isHoliday;
+    private boolean isWeekEnd;
 
 
     public MonthlyDate(int month, int date, String day, boolean isHoliday) {
@@ -31,4 +32,14 @@ public class MonthlyDate {
         return this.isHoliday;
     }
 
+    public void setWeekEnd() {
+        this.isWeekEnd = false;
+        if (this.day.equals("토") || this.day.equals("일")) {
+            this.isWeekEnd = true;
+        }
+    }
+
+    public boolean isHolidayAndWeekend() {
+        return this.isHoliday && this.isWeekEnd;
+    }
 }
