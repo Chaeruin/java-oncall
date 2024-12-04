@@ -6,13 +6,6 @@ import java.util.Set;
 import oncall.enums.ErrorMessage;
 
 public class InputValidator {
-    public static boolean isMonthAndDayOK(String input) {
-        String[] inputs = input.split(",", -1);
-        if (isMonthOK(inputs[0]) && isDayOK(inputs[1])) {
-            return true;
-        }
-        return false;
-    }
 
     public static boolean isMonthOK(String input) {
         try {
@@ -77,6 +70,13 @@ public class InputValidator {
         if (one.equals(two)) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INPUT.getErrorMessage());
         }
+    }
+
+    public static boolean isEmployeeCondition(String input) {
+        if (isNotNone(input) && isOverFiveNickNameLength(input) && isFiveTo35People(input) && isNotDuplicate(input)) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean isWeelkyHolidaySameEmployee(String week, String holiday) {
