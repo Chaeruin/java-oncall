@@ -30,8 +30,9 @@ public class InputParser {
         return null;
     }
 
-    public static List<String> parseHolidayEmployee(String week, String holiday) {
-        if (InputValidator.isEmployeeCondition(holiday) && InputValidator.isWeelkyHolidaySameEmployee(week, holiday)) {
+    public static List<String> parseHolidayEmployee(List<String> weekly, String holiday) {
+        if (InputValidator.isEmployeeCondition(holiday) && InputValidator.isWeelkyHolidaySameEmployee(weekly,
+                holiday)) {
             LinkedList<String> returnList = (LinkedList<String>) Arrays.asList(holiday.split(",", -1));
             return returnList;
         }

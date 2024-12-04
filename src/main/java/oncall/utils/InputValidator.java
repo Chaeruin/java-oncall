@@ -2,6 +2,7 @@ package oncall.utils;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import oncall.enums.ErrorMessage;
 
@@ -79,8 +80,8 @@ public class InputValidator {
         return false;
     }
 
-    public static boolean isWeelkyHolidaySameEmployee(String week, String holiday) {
-        Set<String> weelkySet = new HashSet<String>(Arrays.asList(week.split(",", -1)));
+    public static boolean isWeelkyHolidaySameEmployee(List<String> weekly, String holiday) {
+        Set<String> weelkySet = new HashSet<String>(weekly);
         Set<String> holidaySet = new HashSet<String>(Arrays.asList(holiday.split(",", -1)));
 
         // 여기 체킹
